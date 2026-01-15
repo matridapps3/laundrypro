@@ -1,25 +1,56 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet, View } from 'react-native'
-import Navbar from '../../components/ui/Navbar.jsx'
-import TabBar from '../../components/ui/TabBar.jsx';
-import BottomBar from '../../components/ui/BottomBar.jsx';
-import { Link } from 'expo-router';
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import React from 'react'
+import { useWardrobe } from '@/contexts/WardrobeContext'
 
-export default function HomeScreen() {
+const overview = () => {
+  const { wardrobeItems } = useWardrobe();
+  
+  // Use wardrobe items directly with their counts
+  const data = wardrobeItems.map((item) => ({
+    category: item.name,
+    total: item.total,
+    available: item.available,
+    inLaundry: item.inLaundry,
+  }));
+
   return (
-    <View style={{height:'100%', flex:1}}>
-    </View>
-  );
+    <ScrollView style={{ flex: 1.2, padding: 16, backgroundColor: '#F8FAFC' }}>
+      <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>
+        Current Status
+      </Text>
+
+      <View style={{height: 1, backgroundColor: '#ccc', marginBottom:16}}/>
+
+      {/* Header */}
+      <View style={{ flexDirection: 'row', borderBottomWidth: 1, borderColor: '#ccc', paddingBottom: 8 }}>
+        <Text style={{ flex: 1.2, fontWeight: 'bold'}}>CATEGORY</Text>
+        <Text style={{ flex: 1, fontWeight: 'bold'}}>TOTAL</Text>
+        <Text style={{ flex: 1, fontWeight: 'bold', color: 'green' }}>AVAIL.</Text>
+        <Text style={{ flex: 1, fontWeight: 'bold', color: 'blue' }}>LAUNDARY</Text>
+      </View>
+
+      {/* Rows */}
+      {data.map((item, index) => (
+        <View
+          key={index}
+          style={{
+            flexDirection: 'row',
+            paddingVertical: 10,
+            borderBottomWidth: 1,
+            borderColor: '#eee',
+            marginBottom: 8
+          }}
+        >
+          <Text style={{ flex: 1.2 }}>{item.category}</Text>
+          <Text style={{ flex: 1, fontWeight: 'bold'}}>{item.total}</Text>
+          <Text style={{ flex: 1, color: 'green' }}>{item.available}</Text>
+          <Text style={{ flex: 1, color: 'blue' }}>{item.inLaundry}</Text>
+        </View>
+      ))}
+    </ScrollView>
+  )
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-});
+export default overview
+
+const styles = StyleSheet.create({})

@@ -17,6 +17,7 @@ export default function TabLayout() {
       <Navbar />
       <TabBar />
     <Tabs
+      initialRouteName="overview"
       screenOptions={{
         tabBarStyle: { 
       display: 'none' 
@@ -30,6 +31,27 @@ export default function TabLayout() {
         options={{
           title: 'Overview',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="send"
+        options={{
+          title: 'Send',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: 'History',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="clock.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="wardrobe"
+        options={{
+          title: 'Wardrobe',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="tshirt.fill" color={color} />,
         }}
       />
       <Tabs.Screen
