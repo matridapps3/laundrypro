@@ -8,9 +8,6 @@ import { Link } from 'expo-router';
 export default function HomeScreen() {
   return (
     <View style={{height:'100%', flex:1}}>
-      <Navbar />
-      <TabBar />
-      <BottomBar />
     </View>
   );
 }

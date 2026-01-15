@@ -1,6 +1,9 @@
 import { Tabs } from 'expo-router';
+import { View } from 'react-native'
 import React from 'react';
-
+import Navbar from '../../components/ui/Navbar.jsx';
+import TabBar from '../../components/ui/TabBar.jsx';
+import BottomBar from '../../components/ui/BottomBar.jsx';
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
@@ -10,6 +13,9 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
+    <View style={{flex:1}}>
+      <Navbar />
+      <TabBar />
     <Tabs
       screenOptions={{
         tabBarStyle: { 
@@ -20,9 +26,9 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
       }}>
       <Tabs.Screen
-        name="index"
+        name="overview"
         options={{
-          title: 'Home',
+          title: 'Overview',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
         }}
       />
@@ -34,5 +40,7 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    <BottomBar />
+    </View>
   );
 }
