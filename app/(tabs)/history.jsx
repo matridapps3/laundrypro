@@ -7,20 +7,29 @@ const history = () => {
 
   // Show confirmation before marking batch as returned
   const handleMarkReturned = (batchId) => {
-    Alert.alert(
-      'Mark as Returned',
-      'Are you sure you want to mark this batch as returned?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Confirm',
-          onPress: () => {
-            markBatchReturned(batchId)
-            Alert.alert('Success', 'Batch marked as returned!')
+    if (Platform.OS === 'web') {
+      // Use browser's native confirm dialog for web
+      if (window.confirm('Are you sure you want to mark this batch as returned?')) {
+        markBatchReturned(batchId)
+        window.alert('Success! Batch marked as returned!')
+      }
+    } else {
+      // Use React Native Alert for mobile
+      Alert.alert(
+        'Mark as Returned',
+        'Are you sure you want to mark this batch as returned?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Confirm',
+            onPress: () => {
+              markBatchReturned(batchId)
+              Alert.alert('Success', 'Batch marked as returned!')
+            }
           }
-        }
-      ]
-    )
+        ]
+      )
+    }
   }
 
   // Calculate total items in a batch
@@ -64,18 +73,25 @@ const history = () => {
           borderRadius: 8,
           borderColor: 'silver',
           backgroundColor: 'white',
-          padding: 40,
-          alignItems: 'center',
+          padding: 18,
+          borderLeftWidth: 4,
+          borderLeftColor: '#2563EB',
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.1,
           shadowRadius: 2,
           elevation: 2
         }}>
-          <Text style={{color: '#666', fontSize: 16, marginBottom: 8, fontWeight: '500'}}>No active batches</Text>
-          <Text style={{color: '#999', fontSize: 14, textAlign: 'center'}}>
-            Items sent to laundry will appear here
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>
+            Active Batches
           </Text>
+          <View style={{height: 1, backgroundColor: '#ccc', marginBottom: 16}}/>
+          <View style={{paddingVertical: 20, alignItems: 'center'}}>
+            <Text style={{color: '#666', fontSize: 16, marginBottom: 8, fontWeight: '500'}}>No active batches</Text>
+            <Text style={{color: '#999', fontSize: 14, textAlign: 'center'}}>
+              Items sent to laundry will appear here
+            </Text>
+          </View>
         </View>
       ) : (
         sortedBatches.map((batch) => (

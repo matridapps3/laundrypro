@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Image, Platform, Alert, Keyboard } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useWardrobe } from '@/contexts/WardrobeContext'
 
 const Wardrobe = () => {
   const[input, setInput] = useState("")
-  const { wardrobeItems, addItem, deleteItem, incrementItem, decrementItem } = useWardrobe()
+  const inputRef = useRef(null)
+  const { wardrobeItems, addItem, deleteItem, incrementItem, decrementItem, resetAllData } = useWardrobe()
 
   // Show confirmation dialog before deleting item
   const handleDelete = (i) => {
@@ -25,8 +26,6 @@ const Wardrobe = () => {
 
   // Validate and add new item type to wardrobe
   const handleAdd = () => {
-    Keyboard.dismiss() // Dismiss keyboard first to ensure button press works
-    
     const trimmedInput = input.trim()
     if (!trimmedInput) {
       Alert.alert('Invalid Input', 'Please enter an item name')
@@ -45,23 +44,26 @@ const Wardrobe = () => {
     
     addItem(trimmedInput)
     setInput("")
+    // Keep keyboard open for better UX - user can continue adding items
   }
 
   return (
     <ScrollView 
+      keyboardShouldPersistTaps="handled"
       contentContainerStyle={{
         paddingBottom: Platform.OS === 'web' ? 100 : 100 // Padding to prevent content from hiding behind bottom bar (80px)
       }}
     >
       <View style={{ flex: 1, padding : Platform.OS === 'web' ? 46 : 18, gap:18}}>
-        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:140, backgroundColor:'white', padding:18}}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>Add New Item Type</Text>
+        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:140, backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#2563EB'}}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>Add New Item Type</Text>
 
            {/*This is a horizontal line for partition*/}
            <View style={{height: 1, backgroundColor: '#ccc', marginBottom:16}}/>
 
           <View style={{flexDirection:'row', gap:8}}>
             <TextInput 
+              ref={inputRef}
               style={{
                 flex: 1,
                 paddingLeft: 12,
@@ -96,8 +98,8 @@ const Wardrobe = () => {
           </View>
         </View>
 
-        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:'auto', backgroundColor:'white', padding:18, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>Manage Inventory</Text>
+        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:'auto', backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#2563EB', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>Manage Inventory</Text>
 
           {wardrobeItems.length === 0 ? (
             <View style={{paddingVertical: 30, alignItems: 'center'}}>
@@ -181,6 +183,61 @@ const Wardrobe = () => {
             })
           )}
         </View>
+
+        {/* Factory Reset Button */}
+        <Pressable
+          onPress={() => {
+            if (Platform.OS === 'web') {
+              const confirmed = window.confirm(
+                'Are you sure you want to reset all data? This will delete all items and batches permanently. This action cannot be undone.'
+              );
+              if (confirmed) {
+                resetAllData()
+                  .then(() => {
+                    window.alert('All data has been reset successfully.');
+                  })
+                  .catch(() => {
+                    window.alert('Failed to reset data. Please try again.');
+                  });
+              }
+            } else {
+              Alert.alert(
+                'Factory Reset',
+                'Are you sure you want to reset all data? This will delete all items and batches permanently. This action cannot be undone.',
+                [
+                  { text: 'Cancel', style: 'cancel' },
+                  {
+                    text: 'Reset All Data',
+                    style: 'destructive',
+                    onPress: async () => {
+                      try {
+                        await resetAllData();
+                        Alert.alert('Success', 'All data has been reset successfully.');
+                      } catch (error) {
+                        Alert.alert('Error', 'Failed to reset data. Please try again.');
+                      }
+                    }
+                  }
+                ]
+              );
+            }
+          }}
+          style={({ pressed }) => ({
+            marginTop: 18,
+            alignSelf: 'flex-end',
+            paddingVertical: 8,
+            paddingHorizontal: 16,
+            borderRadius: 6,
+            backgroundColor: pressed ? '#FEE2E2' : 'transparent',
+            borderWidth: 1,
+            borderColor: '#FCA5A5',
+            opacity: pressed ? 0.8 : 1
+          })}
+        >
+          <Text style={{ color: '#DC2626', fontSize: 13, fontWeight: '500' }}>
+            Factory Reset
+          </Text>
+        </Pressable>
       </View>
     </ScrollView>
   )

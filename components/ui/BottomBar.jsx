@@ -34,6 +34,8 @@ const BottomBar = () => {
       }
       
       // Mobile: save file and use native share dialog
+      // Note: Mobile platforms require user interaction for security reasons
+      // Direct download to Downloads folder without share dialog is not possible
       const tempFileUri = FileSystem.documentDirectory + filename
       await FileSystem.writeAsStringAsync(tempFileUri, jsonString)
       
@@ -138,7 +140,7 @@ const BottomBar = () => {
       backgroundColor: '#F1F5F9', 
       flexDirection: 'row', 
       alignItems: 'center', 
-      justifyContent: 'space-between', 
+      justifyContent: 'space-between',
       paddingLeft: 32, 
       paddingRight: 32,
       borderTopWidth: 1,

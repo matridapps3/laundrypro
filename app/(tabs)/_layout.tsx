@@ -16,53 +16,55 @@ export default function TabLayout() {
     <View style={{flex:1}}>
       <Navbar />
       <TabBar />
-    <Tabs
-      initialRouteName="overview"
-      screenOptions={{
-        tabBarStyle: { 
-      display: 'none' 
-      },
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="overview"
-        options={{
-          title: 'Overview',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="send"
-        options={{
-          title: 'Send',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="history"
-        options={{
-          title: 'History',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="clock.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="wardrobe"
-        options={{
-          title: 'Wardrobe',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="tshirt.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-    <BottomBar />
+      <View style={{ flex: 1 }}>
+        <Tabs
+          initialRouteName="overview"
+          screenOptions={{
+            tabBarStyle: { 
+              display: 'none' 
+            },
+            tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+            headerShown: false,
+            tabBarButton: HapticTab,
+          }}>
+          <Tabs.Screen
+            name="overview"
+            options={{
+              title: 'Overview',
+              tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="send"
+            options={{
+              title: 'Send',
+              tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="history"
+            options={{
+              title: 'History',
+              tabBarIcon: ({ color }) => <IconSymbol size={28} name="clock.fill" color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="wardrobe"
+            options={{
+              title: 'Wardrobe',
+              tabBarIcon: ({ color }) => <IconSymbol size={28} name="tshirt.fill" color={color} />,
+            }}
+          />
+          <Tabs.Screen
+            name="explore"
+            options={{
+              title: 'Explore',
+              tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+            }}
+          />
+        </Tabs>
+      </View>
+      <BottomBar />
     </View>
   );
 }

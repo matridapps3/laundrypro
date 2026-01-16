@@ -358,6 +358,22 @@ export const WardrobeProvider = ({ children }) => {
     return batches.filter(batch => batch.act === true);
   }, [batches]);
 
+  // Reset all application data to initial state
+  const resetAllData = useCallback(async () => {
+    try {
+      // Clear state
+      setWardrobeItems([]);
+      setBatches([]);
+      
+      // Clear AsyncStorage
+      await AsyncStorage.removeItem(STORAGE_KEY);
+      await AsyncStorage.removeItem(BATCHES_STORAGE_KEY);
+    } catch (error) {
+      console.error('Error resetting data:', error);
+      throw error;
+    }
+  }, []);
+
   return (
     <WardrobeContext.Provider value={{ 
       wardrobeItems, 
@@ -371,7 +387,8 @@ export const WardrobeProvider = ({ children }) => {
       markBatchReturned,
       isLoading, 
       getAllData, 
-      restoreData 
+      restoreData,
+      resetAllData
     }}>
       {children}
     </WardrobeContext.Provider>
