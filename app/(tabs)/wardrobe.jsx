@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Image, Platform, Alert } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Image, Platform, Alert, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import { useWardrobe } from '@/contexts/WardrobeContext'
 
@@ -25,6 +25,8 @@ const Wardrobe = () => {
 
   // Validate and add new item type to wardrobe
   const handleAdd = () => {
+    Keyboard.dismiss() // Dismiss keyboard first to ensure button press works
+    
     const trimmedInput = input.trim()
     if (!trimmedInput) {
       Alert.alert('Invalid Input', 'Please enter an item name')
@@ -51,7 +53,7 @@ const Wardrobe = () => {
         paddingBottom: Platform.OS === 'web' ? 100 : 100 // Padding to prevent content from hiding behind bottom bar (80px)
       }}
     >
-      <View style={{ flex: 1, padding : Platform.OS === 'web' ? 46 : 18, backgroundColor: '#F8FAFC', gap:18}}>
+      <View style={{ flex: 1, padding : Platform.OS === 'web' ? 46 : 18, gap:18}}>
         <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:140, backgroundColor:'white', padding:18}}>
           <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12 }}>Add New Item Type</Text>
 
@@ -74,6 +76,8 @@ const Wardrobe = () => {
               value={input} 
               onChangeText={setInput}
               onSubmitEditing={handleAdd}
+              returnKeyType="done"
+              blurOnSubmit={true}
             />
             <Pressable 
               style={({ pressed }) => ({
