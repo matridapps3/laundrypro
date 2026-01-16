@@ -1,50 +1,77 @@
-# Welcome to your Expo app 👋
+# LaundryPro
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile and web application for managing your wardrobe and tracking laundry items. Keep track of your clothes, send items to laundry, and monitor what's available vs. what's in the wash.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Wardrobe Management**: Add and manage clothing categories with total, available, and in-laundry counts
+- **Batch Tracking**: Create batches when sending items to laundry with date tracking
+- **Status Overview**: View real-time summary of all items across categories
+- **Data Backup & Restore**: Export and import your data as JSON files
+- **Cross-Platform**: Works on iOS, Android, and Web
 
+## Installation
+
+1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the app
-
+2. Start the development server:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+3. Run on your preferred platform:
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Press `w` for web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Usage
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Overview Tab
+View current status of all items with totals, available count, and items in laundry.
 
-## Get a fresh project
+### Send Tab
+Select items and quantities to create a batch for sending to laundry.
 
-When you're ready, run:
+### History Tab
+View active laundry batches and mark them as returned when items come back.
 
-```bash
-npm run reset-project
+### Wardrobe Tab
+- Add new clothing categories
+- Manage inventory with increment/decrement counters
+- Delete categories when no longer needed
+
+### Backup & Restore
+Use the bottom bar to backup your data to a JSON file or restore from a previous backup.
+
+## Project Structure
+
+```
+laundrypro/
+├── app/
+│   └── (tabs)/
+│       ├── overview.jsx    # Status overview with summary
+│       ├── send.jsx        # Create laundry batches
+│       ├── history.jsx     # Active batches management
+│       └── wardrobe.jsx    # Manage wardrobe items
+├── contexts/
+│   └── WardrobeContext.jsx # Global state management
+└── components/
+    └── ui/                  # UI components (Navbar, TabBar, BottomBar)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Tech Stack
 
-## Learn more
+- **React Native** with **Expo**
+- **Expo Router** for navigation
+- **AsyncStorage** for local data persistence
+- **React Context API** for state management
 
-To learn more about developing your project with Expo, look at the following resources:
+## Data Model
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Each wardrobe item maintains:
+- `total`: Total number of items owned
+- `available`: Items currently available to use
+- `inLaundry`: Items currently at the laundry
