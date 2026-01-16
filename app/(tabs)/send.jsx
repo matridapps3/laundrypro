@@ -50,7 +50,7 @@ const send = () => {
 
   return (
     <ScrollView style={{ flex: 1, padding: Platform.OS === 'web' ? 46 : 18, backgroundColor: '#F8FAFC' }}>
-      <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', backgroundColor:'white', padding:18, marginBottom: 18, borderLeftWidth: 4, borderLeftColor: '#2563EB', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
+      <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', backgroundColor:'white', padding:18, marginBottom: 18, borderLeftWidth: 4, borderLeftColor: '#ccc', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
         <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>Create Batch</Text>
         <View style={{height: 1, backgroundColor: '#ccc', marginBottom:16}}/>
 

@@ -62,11 +62,6 @@ const history = () => {
 
   return (
     <ScrollView style={{ flex: 1, padding: Platform.OS === 'web' ? 46 : 18, backgroundColor: '#F8FAFC' }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>
-        Active Batches
-      </Text>
-      <View style={{height: 1, backgroundColor: '#ccc', marginBottom:16}}/>
-
       {sortedBatches.length === 0 ? (
         <View style={{
           borderWidth: 1,
@@ -75,7 +70,7 @@ const history = () => {
           backgroundColor: 'white',
           padding: 18,
           borderLeftWidth: 4,
-          borderLeftColor: '#2563EB',
+          borderLeftColor: '#ccc',
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 1 },
           shadowOpacity: 0.1,
@@ -105,7 +100,7 @@ const history = () => {
               padding: 18,
               marginBottom: 16,
               borderLeftWidth: 4,
-              borderLeftColor: '#2563EB',
+              borderLeftColor: '#ccc',
               shadowColor: '#000',
               shadowOffset: { width: 0, height: 1 },
               shadowOpacity: 0.1,

@@ -55,7 +55,7 @@ const Wardrobe = () => {
       }}
     >
       <View style={{ flex: 1, padding : Platform.OS === 'web' ? 46 : 18, gap:18}}>
-        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:140, backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#2563EB'}}>
+        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:140, backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#ccc'}}>
           <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>Add New Item Type</Text>
 
            {/*This is a horizontal line for partition*/}
@@ -98,7 +98,7 @@ const Wardrobe = () => {
           </View>
         </View>
 
-        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:'auto', backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#2563EB', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
+        <View style={{borderWidth:1, borderRadius:8, borderColor:'silver', height:'auto', backgroundColor:'white', padding:18, borderLeftWidth: 4, borderLeftColor: '#ccc', shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.1, shadowRadius: 2, elevation: 2}}>
           <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 12, color: '#1E40AF' }}>Manage Inventory</Text>
 
           {wardrobeItems.length === 0 ? (

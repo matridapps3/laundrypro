@@ -32,7 +32,7 @@ const overview = () => {
         }}
       >
         <View style={{ marginBottom: 20 }}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1E293B', marginBottom: 6 }}>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#1E40AF', marginBottom: 6 }}>
             Current Status
           </Text>
           <Text style={{ fontSize: 14, color: '#64748B' }}>
@@ -49,6 +49,8 @@ const overview = () => {
             padding: 40,
             alignItems: 'center',
             marginTop: 20,
+            borderLeftWidth: 4,
+            borderLeftColor: '#ccc',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 1 },
             shadowOpacity: 0.05,
