@@ -244,5 +244,3 @@ const Wardrobe = () => {
 }
 
 export default Wardrobe
-
-const styles = StyleSheet.create({})
