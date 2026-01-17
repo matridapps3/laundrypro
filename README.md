@@ -75,3 +75,7 @@ Each wardrobe item maintains:
 - `total`: Total number of items owned
 - `available`: Items currently available to use
 - `inLaundry`: Items currently at the laundry
+
+## Author
+
+Rohit Kumar - Matrid Technologies
